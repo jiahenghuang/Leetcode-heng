@@ -65,6 +65,87 @@ def find(e):
     p.next=p.next.next
 
 #单链表的缺点
+尾端插入需要遍历所有元素
+#循环单链表就是为了改进单链表的这个缺点，将指针放在尾部，指向最后一个元素，最后一个元素右指向首元素。
+#因为指针知道，很容易查找到最后一个元素，rear.next,也很好查找到第一个元素rear.next.next,时间复杂度都是o(1)
+class LNode():
+    def __init__(self,elem,next_=None):
+        self.elem = elem
+        self.next = next_
+#一个疑问，这里用了self._rear这个指针，之前首节点都是用一个包括数据域和指针域，其实无所谓，首节点数据无意义，不用也罢，这个实现感觉更规范一些
+class LCList:
+    def __init__(self):
+        self._rear = None
+    
+    def is_empty(self):
+        return self._rear is None
+    
+    def pre_append(self,e): #前端插入
+        p = LNode(e)
+        if self._rear is None:
+            self._rear=p #self._rear就是head.next
+            p.next=p #指针指向首元素，也就是自身
+        else:
+            p.next=self._rear.next  #首先将首元素作为p.next节点
+            self._rear.next=p
+
+    def append(self,e):   #尾端插入
+        p = LNode(e)
+        if self._rear is None:
+            self._rear=p #self._rear就是head.next
+            p.next=p #指针指向首元素，也就是自身
+        else:
+            p.next=self._rear.next
+            self._rear.next=p
+            self._rear=p
+
+    def pre_del(self):  #首元素删除
+        if self._rear is None:return
+        self._rear.next=self._rear.next.next
+
+    def tail_del(self):
+        #尾端删除不是循环单链表的强处，需要o(n)时间复杂度
+
+#对链表的所有想法进行遍历，肯定会想到双链表
+#双链表不过是多了个前向指针，并且head节点的pre指针指向了尾元素
+def DLNode(LNode):
+    def __init__(self,elem,prev=None,next_=None)
+        LNode.__init__(self,elem,next_)
+        self.prev=prev
+
+class DLList:
+    def __init__(self):
+        self.head=None
+        self.rear=None
+    
+    def append(self,elem):
+        p=DLNode(elem)
+        if self.head is None:
+            self.head=p
+            self.rear=p
+        else:
+            p.next=self.rear.next
+            p.prev=self.rear
+            self.rear=p
+    
+    def head_insert(self, elem):
+        p=DLNode(elem)
+        if self.head is None:
+            self.head=p
+            self.rear=p
+        else:
+            self.head.next.prev=p
+            self.rear.next=p
+            self.head=p
+
+    def head_del(self)
+        if self.head is None:raise False
+        self.head=self.head.next
+    
+    def tail_del(self):
+        if self.head is None:raise error
+        self.tail.prev=self.tail.next
+
 
 
 
