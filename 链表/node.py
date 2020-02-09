@@ -146,7 +146,7 @@ class DLList:
         if self.head is None:raise error
         self.tail.prev=self.tail.next
 
-
+#循环双链表没什么用，功能使用双链表就能实现
 
 
 
