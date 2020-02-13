@@ -21,12 +21,37 @@ class Solution():
         length = len(s)
         i,j,result=0,0,0
         letter = set()
-         while i < s and j < s:
+        while i < length and j < length:
             if s[j] not in letter:
                 letter.add(s[j])
                 j += 1
                 result = max(j-i, result)
+                print(letter)
             else:
                 letter.remove(s[i])
                 i += 1
         return result
+
+#增加一个问题，返回最长子串
+class Solution():
+    def LengthOfLongestString(self, s):
+        if not s:return 0
+        length = len(s)
+        i,j,result=0,0,''
+        letter = set()
+        while i < length and j < length:
+            if s[j] not in letter:
+                letter.add(s[j])
+                j += 1
+                if j - i > len(result):
+                    result = s[i:j]
+            else:
+                letter.remove(s[i])
+                i += 1
+        return result
+
+
+if __name__=='__main__':
+    s='aasdffdaweasdfsadff'
+    print(Solution().LengthOfLongestString(s))
+
