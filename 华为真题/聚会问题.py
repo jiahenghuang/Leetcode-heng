@@ -21,6 +21,23 @@
 # [18,19):1
 # [19,20):1
 
+#思想写出来了，没有用到什么数据结构的知识。。。时间复杂度可以接受。
+
+class Solution():
+    def party_num(self,llist):
+        time_dict = {}
+        for i in range(12,20):
+            time_dict[(i,i+1)]=0
+        for start, end in llist:
+            if start != -1 and end != -1:
+                for i in range(start,end):
+                    time_dict[(start,start+1)] += 1
+        for i in range(12,20):
+            print('[%d,%d]:%d'%(i,i+1,time_dict[(i,i+1)]))
+
+
+if __name__=='__main__':
+    input_list = [()]
 
 
 
